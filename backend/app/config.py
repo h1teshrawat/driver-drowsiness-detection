@@ -9,6 +9,7 @@ All tunable numbers live in one Pydantic model so that:
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 from pydantic import BaseModel, Field
@@ -43,8 +44,14 @@ class Settings(BaseModel):
     alarm_volume: float = Field(0.8, ge=0.0, le=1.0)
 
 
-def load_settings(path: Path = SETTINGS_FILE) -> Settings:
+def settings_path() -> Path:
+    """Settings file location. Override with the ``DDD_SETTINGS_PATH`` env var (used by tests)."""
+    return Path(os.environ.get("DDD_SETTINGS_PATH", SETTINGS_FILE))
+
+
+def load_settings(path: Path | None = None) -> Settings:
     """Load settings from disk, falling back to defaults if missing or invalid."""
+    path = path or settings_path()
     if path.exists():
         try:
             return Settings(**json.loads(path.read_text(encoding="utf-8")))
@@ -53,6 +60,7 @@ def load_settings(path: Path = SETTINGS_FILE) -> Settings:
     return Settings()
 
 
-def save_settings(settings: Settings, path: Path = SETTINGS_FILE) -> None:
+def save_settings(settings: Settings, path: Path | None = None) -> None:
     """Persist settings as pretty-printed JSON."""
+    path = path or settings_path()
     path.write_text(settings.model_dump_json(indent=2), encoding="utf-8")

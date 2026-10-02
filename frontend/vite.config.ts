@@ -12,4 +12,11 @@ export default defineConfig({
       '/ws': { target: 'ws://127.0.0.1:8000', ws: true },
     },
   },
+  build: {
+    chunkSizeWarningLimit: 600, // the lazily-loaded charts chunk is ~560 kB (165 kB gzipped)
+    rollupOptions: {
+      // Recharts is large and only needed by the dashboard pages: give it its own cached file
+      output: { manualChunks: { charts: ['recharts'] } },
+    },
+  },
 })

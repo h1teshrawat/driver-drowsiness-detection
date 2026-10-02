@@ -1,4 +1,7 @@
 # Store text files with LF line endings in the repo (Git converts on checkout as needed)
 * text=auto eol=lf
+# Windows scripts keep CRLF so cmd.exe / PowerShell 5.1 read them reliably
+*.bat text eol=crlf
+*.ps1 text eol=crlf
 *.png binary
 *.jpg binary
