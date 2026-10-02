@@ -1,0 +1,22 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# ---- Local data (personal sessions and calibrated thresholds stay on this machine) ----
+backend/data/
+backend/settings.json
+
+# ---- Node / Vite ----
+frontend/node_modules/
+frontend/dist/
+*.local
+
+# ---- Editor / OS / tooling ----
+.vscode/
+.idea/
+.claude/
+Thumbs.db
+desktop.ini
+.DS_Store

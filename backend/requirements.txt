@@ -1,0 +1,13 @@
+# Computer vision / detection
+mediapipe==0.10.14            # pinned: keeps the mp.solutions.face_mesh API
+opencv-contrib-python==4.10.0.84  # mediapipe already depends on this; do NOT also install opencv-python
+numpy==1.26.4                 # mediapipe 0.10.14 is built against NumPy 1.x
+
+# Web API
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+
+# Testing
+pytest==8.3.4
+httpx==0.28.1                 # used by FastAPI's TestClient

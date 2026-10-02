@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-slate-100 text-slate-900 antialiased;
+    color-scheme: light;
+  }
+  html.dark {
+    @apply bg-[#05070d] text-slate-100;
+    color-scheme: dark;
+  }
+  body {
+    @apply min-h-screen font-sans;
+  }
+  ::selection {
+    @apply bg-cyan-400/30;
+  }
+}
+
+@layer components {
+  /* Frosted-glass card used across the dashboard */
+  .glass {
+    @apply rounded-2xl border border-slate-200/80 bg-white/70 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.15)] backdrop-blur-xl
+           dark:border-white/[0.08] dark:bg-white/[0.035] dark:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)];
+  }
+
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           transition duration-150 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70;
+  }
+  .btn-primary {
+    @apply btn bg-cyan-400 text-slate-950 shadow-[0_0_28px_-6px_rgba(34,211,238,0.75)] hover:bg-cyan-300;
+  }
+  .btn-ghost {
+    @apply btn border border-slate-300 bg-white/60 text-slate-700 hover:bg-white
+           dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10;
+  }
+  .btn-danger {
+    @apply btn bg-rose-500 text-white shadow-[0_0_28px_-6px_rgba(244,63,94,0.7)] hover:bg-rose-400;
+  }
+
+  .label-caps {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400;
+  }
+}
+
+/* Range slider thumb (the input's `color` sets the ring colour) */
+.range-hud::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 3px solid currentColor;
+  box-shadow: 0 0 12px currentColor;
+  cursor: pointer;
+}
+.range-hud::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 3px solid currentColor;
+  box-shadow: 0 0 12px currentColor;
+  cursor: pointer;
+}
+
+/* Subtle HUD grid behind everything */
+.bg-hud-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+}
